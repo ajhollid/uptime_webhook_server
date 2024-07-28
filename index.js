@@ -3,7 +3,10 @@ const app = express();
 
 app.post("/api/v1/deploy", (req, res) => {
   try {
-    console.log(req);
+    if (req.headers["x-github-event"] === "pull_request") {
+      const pullRequest = req.body.pull_request;
+      console.log(pullRequest);
+    }
     res
       .status(200)
       .json({ status: "success", message: "Deployed successfully" });
