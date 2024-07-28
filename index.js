@@ -6,7 +6,9 @@ app.post("/api/v1/deploy", (req, res) => {
   try {
     if (req.headers["x-github-event"] === "pull_request") {
       const pullRequest = req.body.pull_request;
-      console.log(pullRequest);
+      if (pullRequest.merged === true && pullRequest.base.ref === "master") {
+        console.log("run deploy script");
+      }
     }
     res
       .status(200)
