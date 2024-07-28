@@ -1,13 +1,24 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
+const { exec } = require("child_process");
 
 app.post("/api/v1/deploy", (req, res) => {
   try {
     if (req.headers["x-github-event"] === "pull_request") {
       const pullRequest = req.body.pull_request;
       if (pullRequest.merged === true && pullRequest.base.ref === "master") {
-        console.log("run deploy script");
+        exec("sh ../test.sh", (error, stdout, stderr) => {
+          if (error) {
+            console.log(`error: ${error.message}`);
+            return;
+          }
+          if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
+          }
+          console.log(`stdout: ${stdout}`);
+        });
       }
     }
     res
