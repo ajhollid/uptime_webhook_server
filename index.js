@@ -3,7 +3,7 @@ const app = express();
 
 app.post("/api/v1/deploy", (req, res) => {
   try {
-    console.log("Deploying...");
+    console.log(req);
     res
       .status(200)
       .json({ status: "success", message: "Deployed successfully" });
