@@ -1,11 +1,5 @@
 # Webhook Server
 
-Listen on port 5001 for pull requests
-
-This should run only when branches are merged to master
-
-Adding a line
-
-To run [Webhook](https://github.com/adnanh/webhook):
-
-`webhook -hooks hooks.json -verbose -hotreload &`
+1.  Install webhook server `sudo apt-get install webhook`
+2.  Create `hook.json` in root dir with required rules
+3.  Create script to run in root dir
